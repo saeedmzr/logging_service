@@ -28,4 +28,5 @@ class LogTest extends TestCase
         $this->assertEquals($services_count , $logRepository->all()->count());
 
     }
+
 }

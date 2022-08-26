@@ -22,5 +22,17 @@ class LogTest extends TestCase
             ->assertStatus(422);
     }
 
+    public function test_api_fail_if_i_dont_pass_statusCode_as_an_integer()
+    {
+        $this->json('get', '/api/count', ['statusCode' => 'asdsa'], ['Accept' => 'application/json'])
+            ->assertStatus(422);
+    }
+
+    public function test_check_count_if_i_dont_pass_any_parametrs()
+    {
+        $this->json('get', '/api/count', [], ['Accept' => 'application/json'])
+            ->assertExactJson(['counter' => Log::all()->count() ]);
+
+    }
 
 }
