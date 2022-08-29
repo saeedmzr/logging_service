@@ -9,8 +9,10 @@ trait ImportLineTrait
 {
 
 
-    public function importLineToLog(string $line, $last_logged_at)
+    public function importLineToLog(string $line, $last_logged_at = null)
     {
+
+
 
         $date = $this->getBetween($line, "[", "]");
         $logged_at = Carbon::parse($date)->toDateTime();

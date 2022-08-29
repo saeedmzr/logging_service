@@ -47,9 +47,13 @@ class importLogs extends Command
         $last_logged_at = $this->logRepsoitory->getLatestLogDateTime();
 
         try {
-            if ($file = fopen(public_path('logs.txt'), "r")) {
+            if ($file = fopen(public_path('logs/logs.txt'), "r")) {
                 while (!feof($file)) {
+//                    read file line by line to invoid file from conquering memory
                     $line = fgets($file);
+//                remove space and \n
+                    $line = trim(preg_replace('/\s\s+/', '', $line));
+
                     if (!empty($line))
                         $this->importLineToLog($line, $last_logged_at);
                 }
