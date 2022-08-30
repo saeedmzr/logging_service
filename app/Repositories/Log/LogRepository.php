@@ -36,16 +36,15 @@ class LogRepository extends BaseRepository implements LogRepositoryInterface
         }
 
         if (isset($payload['startDate'])) {
-            $query = $query->where('logged_at', '>=', Carbon::createFromFormat('d/M/Y H:i:s',$payload['startDate']));
+            $query = $query->where('logged_at', '>=', Carbon::createFromFormat('d/M/Y H:i:s', $payload['startDate']));
         }
         if (isset($payload['endDate'])) {
-            $query = $query->where('logged_at', '<=', Carbon::createFromFormat('d/M/Y H:i:s',$payload['endDate']) );
+            $query = $query->where('logged_at', '<=', Carbon::createFromFormat('d/M/Y H:i:s', $payload['endDate']));
         }
 
 
         return $query->count();
     }
-
 
 
 }

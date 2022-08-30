@@ -33,7 +33,7 @@ class importLogs extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Using this command for inserting logs';
 
     /**
      * Execute the console command.
@@ -44,7 +44,7 @@ class importLogs extends Command
     {
 
 //        Get  time of latest logg based on logged_at colomn to avoid duplicating records
-        $last_logged_at = $this->logRepsoitory->getLatestLogDateTime();
+        $lastLoggedAt = $this->logRepsoitory->getLatestLogDateTime();
 
         try {
             if ($file = fopen(public_path('logs/logs.txt'), "r")) {
@@ -54,8 +54,9 @@ class importLogs extends Command
 //                remove space and \n
                     $line = trim(preg_replace('/\s\s+/', '', $line));
 
+//                    check line only if its not a empty line
                     if (!empty($line))
-                        $this->importLineToLog($line, $last_logged_at);
+                        $this->importLineToLog($line, $lastLoggedAt);
                 }
 
             }

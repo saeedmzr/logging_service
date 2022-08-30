@@ -9,42 +9,41 @@ trait ImportLineTrait
 {
 
 
-    public function importLineToLog(string $line, $last_logged_at = null)
+    public function importLineToLog(string $line, $lastLoggedAt = null)
     {
 
 
-
         $date = $this->getBetween($line, "[", "]");
-        $logged_at = Carbon::parse($date)->toDateTime();
+        $loggedAt = Carbon::parse($date)->toDateTime();
 
 
 //                check if logged at is ok and we didnt have aleady saved it.
-        if (empty($last_logged_at) || Carbon::parse($last_logged_at)->timestamp < $logged_at->getTimestamp()) {
+        if (empty($lastLoggedAt) || Carbon::parse($lastLoggedAt)->timestamp < $loggedAt->getTimestamp()) {
 
 //                   get service name
             $service = explode(' - -', $line)[0];
 //                  getstatus code
-            $status_code = $this->getBetween($line, '" ', '\n');
+            $statusCode = $this->getBetween($line, '" ', '\n');
 
 
-            $method_endpont_version = $this->getBetween($line, '"', '"');
+            $methodVendpontVersion = $this->getBetween($line, '"', '"');
 
 //                  get method
-            $method = explode(' ', $method_endpont_version)[0];
+            $method = explode(' ', $methodVendpontVersion)[0];
 
 //                   get endpoint
-            $endpoint = explode(' ', $method_endpont_version)[1];
+            $endpoint = explode(' ', $methodVendpontVersion)[1];
 
 //             get http version
-            $http_version = explode(' ', $method_endpont_version)[2];
+            $httpVersion = explode(' ', $methodVendpontVersion)[2];
 
             $payload = [
                 'service_name' => $service,
-                'status_code' => $status_code,
-                'logged_at' => $logged_at,
+                'status_code' => $statusCode,
+                'logged_at' => $loggedAt,
                 'method' => $method,
                 'endpoint' => $endpoint,
-                'http_version' => $http_version,
+                'http_version' => $httpVersion,
             ];
 //              create our payload and store in DB
             Log::create($payload);
