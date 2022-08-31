@@ -32,9 +32,10 @@ in this script, I use **laravel 9.19** and PHP **PHP 8**.
 I also try to implement **repository pattern**, **dry**, **kiss**, **solid principles**, and **PHP unit**.
 
 
-### instalation
+### Instalation
 
 - First, you have to clone into the repo.
+- After that, you have to run **composer install**.
 - Then you have to create two databases. one for script and another one for testing.
 - After that create .env.testing and fill it with your test database
 - Run **PHP artisan config:cache --env=testing** to setup your DB for testing
@@ -47,3 +48,8 @@ I also try to implement **repository pattern**, **dry**, **kiss**, **solid princ
 
 
 Endpoint of count logs webservices : **/api/count**
+
+### To do
+-  Build a web service for creating a log with credentials.
+- Optimize count web service by using **Redis**.
+- Build another web service that receives the start and end date and says **how many counts we have in each day**.
